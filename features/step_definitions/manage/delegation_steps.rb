@@ -288,9 +288,9 @@ When(/^I pick a user instead of a delegation$/) do
   @delegation = @contract.user
   @delegated_user = @contract.delegated_user
   @new_user = @current_inventory_pool.users.not_as_delegations.first
-  all('input[data-select-lines]', minimum: 1).each_with_index do |line, i|
-    el = all('input[data-select-lines]')[i]
-    el.click unless el.checked?
+  expect(page).to have_content _('Availability loaded')
+  all('input[data-select-lines]', minimum: 1).map do |input|
+    input.click unless input.checked?
   end
   multibutton = first('.multibutton', text: _('Hand Over Selection')) || first('.multibutton', text: _('Edit Selection'))
   multibutton.find('.dropdown-toggle').click if multibutton
