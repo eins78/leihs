@@ -165,14 +165,6 @@ steps_for :users_and_organisations do
     expect(texts.count).to be Procurement::Access.admins.count
   end
 
-  # step 'a admin user exists' do
-  #   # FactoryGirl.create(:procurement_access, :admin)
-  #
-  #   @admin = Procurement::Access.admins \
-  #     # .where.not(user_id: @current_user)
-  #     .order('RAND()').first.user
-  # end
-
   step 'I can delete an admin' do
     @admin = Procurement::Access.admins \
               .where.not(user_id: @current_user).first.user

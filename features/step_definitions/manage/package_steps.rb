@@ -38,7 +38,7 @@ Then /^the packages have their own inventory codes$/ do
 end
 
 Given /^a (never|once) handed over item package is currently in stock$/ do |arg1|
-  item_packages = @current_inventory_pool.items.packages.in_stock.order('RAND ()')
+  item_packages = @current_inventory_pool.items.packages.in_stock
   @package = case arg1
                when 'never'
                  item_packages.detect {|p| p.item_lines.empty? }
@@ -92,7 +92,7 @@ end
 
 When /^I edit a model that already has packages( in mine and other inventory pools)?$/ do |arg1|
   step 'I open the inventory'
-  @model = @current_inventory_pool.models.order('RAND ()').detect do |m|
+  @model = @current_inventory_pool.models.detect do |m|
     b = (not m.items.empty? and m.is_package?)
     if arg1
       b = (b and m.items.map(&:inventory_pool_id).uniq.size > 1)

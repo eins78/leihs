@@ -610,7 +610,7 @@ When(/^I switch from my user to a delegation$/) do
 end
 
 When(/^that delegation is enabled for an inventory pool$/) do
-  @inventory_pool = @delegation.inventory_pools.where(id: @delegated_user.inventory_pools).order("RAND()").first
+  @inventory_pool = @delegation.inventory_pools.where(id: @delegated_user.inventory_pools).first
 end
 
 When(/^I am suspended in that inventory pool$/) do

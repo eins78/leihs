@@ -733,7 +733,7 @@ Given(/^I am editing a user who has access to (and no items from )?(the current|
                 access_rights.first
               end.user
     when 'an'
-      access_right = AccessRight.active.where(role: :customer, inventory_pool_id: @current_user.inventory_pools.managed).order('RAND ()').detect {|ar| ar.inventory_pool.reservations.where(user_id: ar.user).empty? }
+      access_right = AccessRight.active.where(role: :customer, inventory_pool_id: @current_user.inventory_pools.managed).detect {|ar| ar.inventory_pool.reservations.where(user_id: ar.user).empty? }
       @user = access_right.user
       @current_inventory_pool = access_right.inventory_pool
   end

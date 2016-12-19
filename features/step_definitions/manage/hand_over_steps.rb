@@ -35,7 +35,7 @@ end
 
 # Superseded by sign_contract_steps.rb
 Given(/^I open a hand over containing software$/) do
-  @hand_over = @current_inventory_pool.visits.hand_over.order('RAND ()').detect {|v| v.reservations.any?{|cl| cl.model.is_a? Software } }
+  @hand_over = @current_inventory_pool.visits.hand_over.detect {|v| v.reservations.any?{|cl| cl.model.is_a? Software } }
   step 'I open the hand over'
 end
 

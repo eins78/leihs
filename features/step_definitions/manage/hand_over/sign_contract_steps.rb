@@ -3,7 +3,7 @@
 When(/^I open a hand over( with at least one unassigned line)?( for today)?( with options| with models)?$/) do |unassigned_line, for_today, with_options_or_models|
   @current_inventory_pool = @current_user.inventory_pools.managed.detect do |ip|
 
-    @customer = ip.users.not_as_delegations.order('RAND ()').detect do |user|
+    @customer = ip.users.not_as_delegations.detect do |user|
       if unassigned_line and for_today
         user.visits.hand_over.any?{ |v| v.reservations.size >= 3 and v.reservations.any? { |l| not l.item and l.start_date == ip.next_open_date(Time.zone.today) } }
       elsif for_today
